@@ -8,7 +8,14 @@ import { AppName } from "@/lib/Constant";
 
 function Compressor() {
   const [compressedData, setCompressedData] = useState(null);
-  const { image, setImage, quality, setQuality,isUploadedClicked,setIsUploadedClicked } = useAction();
+  const {
+    image,
+    setImage,
+    quality,
+    setQuality,
+    isUploadedClicked,
+    setIsUploadedClicked,
+  } = useAction();
   const handleQualityChange = (e: any) => {
     setQuality(Number(e.target.value));
   };
@@ -18,10 +25,11 @@ function Compressor() {
   const Downlaod = () => {
     const link = document.createElement("a");
     link.href = `data:image/jpeg;base64,${compressedData}`;
-    link.download = image?.name.split(".")[0]+"_compressed by_" + AppName + ".jpeg";
+    link.download =
+      image?.name.split(".")[0] + "_compressed by_" + AppName + ".jpeg";
     document.body.appendChild(link);
     link.click();
-   // document.body.removeChild(link);
+    // document.body.removeChild(link);
   };
   const formData = new FormData();
 
@@ -50,7 +58,7 @@ function Compressor() {
       console.error("Error during image compression:", error);
     }
   };
-  console.log("isUploadedClicked", isUploadedClicked);
+
   return (
     <div
       className={`flex justify-between  md:px-8 flex-col items-center ${
@@ -64,53 +72,57 @@ function Compressor() {
         </p>
       </div>
       {!isUploadedClicked ? (
-        <DragAndDrop files={image} setFiles={setImage} setIsUploadedClicked={setIsUploadedClicked} />
+        <DragAndDrop
+          files={image}
+          setFiles={setImage}
+          setIsUploadedClicked={setIsUploadedClicked}
+        />
       ) : (
         <div className="flex flex-col gap-y-3  items-center md:flex-row w-full justify-between pb-48">
           <UploadedImage files={image} />
-            <div className="flex flex-col justify-around">
-              {compressedData == null ? (
-                <>
+          <div className="flex flex-col justify-around">
+            {compressedData == null ? (
+              <>
                 <span className="flex flex-col">
-              <label htmlFor="quality">Select Image Quality:</label>
-              <select
-                id="quality"
-                name="quality"
-                value={quality}
-                onChange={handleQualityChange}
-                className="p-2 border border-cyan-200 outline-none shadow-md rounded-lg mt-2"
-                >
-                <option value={100}>100%</option>
-                <option value={75}>75%</option>
-                <option value={50}>50%</option>
-                <option value={25}>25%</option>
-              </select>
-            </span>
-            <div className="flex flex-col mt-4">
-              <button
-                onClick={handleUpload}
-                className="hover:bg-blue-500 bg-transparent transition-all duration-300 border font-bold  border-black hover:border-transparent p-2 hover:text-white rounded-lg"
-                >
-                Compress
-              </button>
-            </div>
-                </>
-              ) : (
-                <div className="flex flex-col gap-4">
+                  <label htmlFor="quality">Select Image Quality:</label>
+                  <select
+                    id="quality"
+                    name="quality"
+                    value={quality}
+                    onChange={handleQualityChange}
+                    className="p-2 border border-cyan-200 outline-none shadow-md rounded-lg mt-2"
+                  >
+                    <option value={100}>100%</option>
+                    <option value={75}>75%</option>
+                    <option value={50}>50%</option>
+                    <option value={25}>25%</option>
+                  </select>
+                </span>
+                <div className="flex flex-col mt-4">
                   <button
-                    onClick={() => setCompressedData(null)}
+                    onClick={handleUpload}
                     className="hover:bg-blue-500 bg-transparent transition-all duration-300 border font-bold  border-black hover:border-transparent p-2 hover:text-white rounded-lg"
                   >
-                    Compress Again
-                    </button>
-                  <button
-                    onClick={() => Downlaod()}
-                    className="hover:bg-blue-500 bg-transparent transition-all duration-300 border font-bold  border-black hover:border-transparent p-2 hover:text-white rounded-lg"
-                  >
-                    Download
-                    </button>
+                    Compress
+                  </button>
                 </div>
-                )}
+              </>
+            ) : (
+              <div className="flex flex-col gap-4">
+                <button
+                  onClick={() => setCompressedData(null)}
+                  className="hover:bg-blue-500 bg-transparent transition-all duration-300 border font-bold  border-black hover:border-transparent p-2 hover:text-white rounded-lg"
+                >
+                  Compress Again
+                </button>
+                <button
+                  onClick={() => Downlaod()}
+                  className="hover:bg-blue-500 bg-transparent transition-all duration-300 border font-bold  border-black hover:border-transparent p-2 hover:text-white rounded-lg"
+                >
+                  Download
+                </button>
+              </div>
+            )}
           </div>
 
           {compressedData != null ? (
@@ -124,7 +136,7 @@ function Compressor() {
   );
 }
 export default Compressor;
- 
+
 const UploadedImage = ({ files }: any) => {
   return (
     <div className="flex px-7 md:px-0 md:w-1/3">
