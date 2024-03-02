@@ -19,9 +19,9 @@ function ActionMenu() {
     : "bg-green-600";
     return (
       <>
-        <div className="flex w-full px-16 py-3 flex-col gap-5 gap-x-5 items-center md:flex-row">
+        <div className="flex w-full px-2 md:px-16 py-3 flex-col gap-5 gap-x-5 items-center md:flex-row">
           <button
-            className={`w-1/2 p-2 flex justify-center items-center gap-5 text-white rounded-md ${compressorButtonStyle}`}
+            className={`md:w-1/2 p-2 flex justify-center items-center gap-5 text-white rounded-md ${compressorButtonStyle}`}
             onClick={() => setCompressor(!compressor)}
             disabled={compressor}
           >
@@ -31,7 +31,7 @@ function ActionMenu() {
             Wanna to Compress?
           </button>
           <button
-            className={`w-1/2 p-2 flex justify-center items-center gap-5 text-white rounded-md ${converterButtonStyle}`}
+            className={`md:w-1/2  p-2 flex justify-center items-center gap-5 text-white rounded-md ${converterButtonStyle}`}
             onClick={() => setCompressor(!compressor)}
             disabled={!compressor}
           >
@@ -40,9 +40,9 @@ function ActionMenu() {
             </span>{" "}
             Wanna to Convert?
           </button>
-            </div>
-            
-            {compressor ? <Compressor />:<Convert />}
+        </div>
+
+        {compressor ? <Compressor /> : <Convert />}
       </>
     );
 }

@@ -4,7 +4,7 @@ import Compressor from "@/components/Compressor";
 import Convert from "@/components/Convert";
 import Header from "@/components/Header";
 import { ActionController, useAction } from "@/hooks/ActionController";
-import Image from "next/image";
+ 
 
 export default function Home() {
   const { compressor} = useAction();
