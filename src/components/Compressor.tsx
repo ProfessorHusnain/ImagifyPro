@@ -8,7 +8,7 @@ import { AppName } from "@/lib/Constant";
 
 function Compressor() {
   const [compressedData, setCompressedData] = useState(null);
-  const { image, setImage, quality, setQuality } = useAction();
+  const { image, setImage, quality, setQuality,isUploadedClicked,setIsUploadedClicked } = useAction();
   const handleQualityChange = (e: any) => {
     setQuality(Number(e.target.value));
   };
@@ -50,6 +50,7 @@ function Compressor() {
       console.error("Error during image compression:", error);
     }
   };
+  console.log("isUploadedClicked", isUploadedClicked);
   return (
     <div
       className={`flex justify-between  md:px-8 flex-col items-center ${
@@ -62,8 +63,8 @@ function Compressor() {
           Compress and optimize your images form the web
         </p>
       </div>
-      {image === null ? (
-        <DragAndDrop files={image} setFiles={setImage} />
+      {!isUploadedClicked ? (
+        <DragAndDrop files={image} setFiles={setImage} setIsUploadedClicked={setIsUploadedClicked} />
       ) : (
         <div className="flex flex-col gap-y-3  items-center md:flex-row w-full justify-between pb-48">
           <UploadedImage files={image} />

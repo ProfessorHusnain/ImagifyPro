@@ -1,14 +1,21 @@
 "use client";
 
 import { useRef, useState } from "react";
-export default function DragAndDrop({ setFiles, files}: { setFiles: any, files: any}) {
+export default function DragAndDrop({
+  setFiles,
+  files,
+  setIsUploadedClicked,
+}: {
+  setFiles: any;
+  files: any;
+  setIsUploadedClicked: any;
+}) {
   const [dragActive, setDragActive] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const [showConfirmationModal, setShowConfirmationModal] =
     useState<boolean>(false);
- 
 
   function handleChange(e: any) {
     e.preventDefault();
@@ -17,6 +24,7 @@ export default function DragAndDrop({ setFiles, files}: { setFiles: any, files: 
       const file = e.target.files[0];
       if (file.type.startsWith("image/")) {
         setFiles(file);
+        setIsUploadedClicked(true);
       } else {
         // Handle non-image file error
         const errorMessage = "Please select an image file.";
@@ -25,17 +33,15 @@ export default function DragAndDrop({ setFiles, files}: { setFiles: any, files: 
       }
     }
   }
- function handleSubmitFile(e: any) {
-   e.preventDefault();
-   if (files.length === 0) {
-     // no file has been submitted
-     console.error("Please select a file to submit.");
-   } else {
-     // write submit logic here
-   }
+  function handleSubmitFile(e: any) {
+    e.preventDefault();
+    if (files.length === 0) {
+      // no file has been submitted
+      console.error("Please select a file to submit.");
+    } else {
+      // write submit logic here
     }
-    
- 
+  }
 
   function handleDrop(e: any) {
     e.preventDefault();
@@ -50,8 +56,27 @@ export default function DragAndDrop({ setFiles, files}: { setFiles: any, files: 
         file.type.startsWith("image/")
       );
 
+      const acceptedFormats = [
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "image/gif",
+        "image/avif",
+        "image/tiff",
+        "image/svg+xml",
+      ];
       if (imageFiles.length > 0) {
-        setFiles(imageFiles[0]);
+        const isValidFormat = acceptedFormats.includes(imageFiles[0].type);
+
+        if (isValidFormat) {
+          setFiles(imageFiles[0]);
+          setIsUploadedClicked(true);
+        } else {
+          const errorMessage =
+            "Unsupported image format. Please upload only JPEG, PNG, WebP, GIF, AVIF, TIFF, or SVG.";
+          setErrorMessage(errorMessage);
+          setShowConfirmationModal(true); // Display confirmation modal with error message
+        }
       } else {
         const errorMessage = "Please drop image files only.";
         setErrorMessage(errorMessage);
@@ -112,7 +137,7 @@ export default function DragAndDrop({ setFiles, files}: { setFiles: any, files: 
           ref={inputRef}
           type="file"
           onChange={handleChange}
-          accept="image/*"
+          accept="image/jpeg, image/png, image/webp, image/gif, image/avif, image/tiff, image/svg+xml"
         />
 
         <p>
@@ -125,8 +150,6 @@ export default function DragAndDrop({ setFiles, files}: { setFiles: any, files: 
           </span>{" "}
           to upload
         </p>
-
-       
 
         {/* <button
           className="bg-black rounded-lg p-2 mt-3 w-auto"
