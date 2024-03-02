@@ -58,7 +58,8 @@ function Compressor() {
       console.error("Error during image compression:", error);
     }
   };
-
+ 
+  
   return (
     <div
       className={`flex justify-between  md:px-8 flex-col items-center ${

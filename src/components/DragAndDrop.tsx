@@ -123,7 +123,7 @@ export default function DragAndDrop({
       <form
         className={`${
           dragActive ? "bg-blue-400" : "bg-blue-100"
-        }  p-4 w-1/2 rounded-lg  min-h-[10rem] text-center flex flex-col items-center justify-center`}
+        }  p-4 w-11/12 md:w-7/12 rounded-lg  min-h-[20rem] text-center flex flex-col items-center justify-center `}
         onDragEnter={handleDragEnter}
         onSubmit={(e) => e.preventDefault()}
         onDrop={handleDrop}
@@ -141,22 +141,19 @@ export default function DragAndDrop({
         />
 
         <p>
-          Drag & Drop files or{" "}
-          <span
-            className="font-bold text-blue-600 cursor-pointer"
-            onClick={openFileExplorer}
-          >
-            <u>Select files</u>
+          Drag & Drop file
+          <br />
+          <span className="font-bold text-blue-600 cursor-pointer">
+            <kbd>or</kbd>
           </span>{" "}
-          to upload
         </p>
 
-        {/* <button
+        <button
           className="bg-black rounded-lg p-2 mt-3 w-auto"
-          onClick={handleSubmitFile}
+          onClick={openFileExplorer}
         >
-          <span className="p-2 text-white">Submit</span>
-        </button> */}
+          <span className="p-2 text-white">Upload Image</span>
+        </button>
       </form>
       {showConfirmationModal && (
         <ConfirmationModel

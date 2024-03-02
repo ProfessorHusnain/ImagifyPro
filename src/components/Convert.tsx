@@ -100,26 +100,25 @@ function Convert() {
               <>
                 <span className="flex flex-row justify-between gap-3">
                   <span className="items-center flex flex-row mt-1 gap-2">
-                    <code className="font-bold text-lg">
+                    <kbd className="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">
                       {image?.name.split(".")[1]}
-                    </code>
-                    <label htmlFor="extention">Convert To</label>
+                    </kbd>
+                    <label htmlFor="extention">To</label>
                   </span>
                   <select
                     id="extention"
                     name="extention"
                     value={extention}
                     onChange={handleExtentionChange}
-                    className="p-2 border border-cyan-200 outline-none shadow-md rounded-lg mt-2"
+                    className="p-2 border border-cyan-200 outline-none shadow-md rounded-lg"
                   >
-                      {ImageExtension.map((ext, index) => {
-                        return (
-                          <option key={index} value={ext}>
-                            {ext}
-                          </option>
-                        );
-                      }
-                    )}
+                    {ImageExtension.map((ext, index) => {
+                      return (
+                        <option key={index} value={ext}>
+                          {ext}
+                        </option>
+                      );
+                    })}
                   </select>
                 </span>
                 <div className="flex flex-col mt-4">
