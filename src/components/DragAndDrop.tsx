@@ -52,7 +52,7 @@ export default function DragAndDrop({
       const droppedFiles = e.dataTransfer.files;
 
       // Filter out non-image files
-      const imageFiles = Array.from(droppedFiles).filter((file) =>
+      const imageFiles:any = Array.from(droppedFiles).filter((file:any) =>
         file.type.startsWith("image/")
       );
 
