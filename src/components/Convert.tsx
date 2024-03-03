@@ -81,7 +81,7 @@ function Convert() {
 
   return (
     <div
-      className={`flex justify-between  md:px-8 flex-col items-center ${
+      className={`flex min-h-[70vh]  md:px-8 flex-col items-center ${
         image != null && "md:flex-col"
       } `}
     >
