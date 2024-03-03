@@ -16,7 +16,59 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+@layer base{
+  @keyframes animate {
+    0% {
+      left: 100px;
+      top: 0;
+    }
+    80% {
+      left: 0;
+      top: 0;
+    }
+    85% {
+      left: 0;
+      top: -20px;
+      width: 20px;
+      height: 20px;
+    }
+    90% {
+      left: 100px;
+      top: -20px;
+      width: 20px;
+      height: 20px;
+    }
+    100% {
+      left: 100px;
+      top: 0;
+    }
+  }
 
+  .animate-div {
+    width: 20px;
+    height: 20px;
+    background: #000;
+    border-radius: 50%;
+    position: absolute;
+    animation: animate 2s linear infinite;
+  }
+
+  .-delay-400 {
+    animation-delay: -0.4s;
+  }
+
+  .-delay-800 {
+    animation-delay: -0.8s;
+  }
+
+  .-delay-1200 {
+    animation-delay: -1.2s;
+  }
+
+  .-delay-1600 {
+    animation-delay: -1.6s;
+  }
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;

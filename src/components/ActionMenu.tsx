@@ -5,9 +5,10 @@ import { FaCompress } from "react-icons/fa";
 import { SiConvertio } from "react-icons/si";
 import Compressor from "./Compressor";
 import Convert from "./Convert";
+import Loader from "./Loader";
 
 function ActionMenu() {
-  const { compressor, isUploadedClicked, setIsUploadedClicked, setCompressor } =
+  const { compressor, isServerAction, setIsUploadedClicked, setCompressor } =
     useAction();
 
   // Define styles based on the active status
@@ -24,9 +25,14 @@ function ActionMenu() {
   };
   return (
     <>
+      {isServerAction && (
+        <div className="loader fixed w-100 h-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <Loader />
+        </div>
+      )}
       <div className="flex w-full px-2 md:px-16 py-3 flex-col gap-5 gap-x-5 items-center md:flex-row">
         <button
-          className={`md:w-1/2 p-2 flex justify-center items-center gap-5 text-white rounded-md ${compressorButtonStyle}`}
+          className={`md:w-1/2 p-2 flex justify-center items-center gap-5 text-white rounded-md bg-primary-500 transition-all duration-500 hover:bg-primary-600 disabled:bg-primary-300 disabled:text-gray-300 font-bold`}
           onClick={() => handleCompressor()}
           disabled={compressor}
         >
@@ -36,7 +42,7 @@ function ActionMenu() {
           Wanna Compress?
         </button>
         <button
-          className={`md:w-1/2  p-2 flex justify-center items-center gap-5 text-white rounded-md ${converterButtonStyle}`}
+          className={`md:w-1/2  p-2 flex justify-center items-center gap-5 text-white rounded-md transition-all duration-500 bg-primary-500 hover:bg-primary-600 disabled:bg-primary-400 disabled:text-gray-300 font-bold`}
           onClick={() => handleCompressor()}
           disabled={!compressor}
         >

@@ -226,3 +226,62 @@ const ConfirmationModel = ({ errorMessage, handleModalConfirmation }: any) => {
     </div>
   );
 };
+/**
+ * 
+ loader{
+ width: 100px;
+ height: 100px;
+ position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -20px -50px;
+ }
+ loader div{
+  width: 20px;
+  height: 20px;
+  background: #000;
+  border-radius: 50%;
+  position: absolute;
+ }
+ #div1{
+  animation: animate 2s linear infinite;
+ }
+ #div2{
+  animation: animate 2s linear infinite -.4s;
+ }
+ #div3{
+  animation: animate 2s linear infinite -.8s;
+ }
+ #div4{
+  animation: animate 2s linear infinite -1.2s;
+ }
+ #div5{
+  animation: animate 2s linear infinite -1.6s;
+ }
+ @-webkit-keyframes animate{
+ 0%{
+ left:100px;
+ top:0;
+ }
+ 80%{
+  left:0;
+  top:0;
+  }
+  85%{
+  left:0;
+  top:-20px;
+  width:20px;
+  height:20px;
+  }
+  90%{
+  left:100px;
+  top:-20px;
+  width:20px;
+  height:20px;
+  }
+  100%{
+  left:100px;
+  top:0;
+  }
+  }
+ */

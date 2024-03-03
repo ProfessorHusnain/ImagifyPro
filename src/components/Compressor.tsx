@@ -15,6 +15,8 @@ function Compressor() {
     setQuality,
     isUploadedClicked,
     setIsUploadedClicked,
+    isServerAction,
+    setIsServerAction,
   } = useAction();
   const handleQualityChange = (e: any) => {
     setQuality(Number(e.target.value));
@@ -40,6 +42,7 @@ function Compressor() {
   }
   const handleUpload = async () => {
     try {
+      setIsServerAction(true)
       const response = await fetch("/api/compress", {
         method: "POST",
         body: formData,
@@ -56,13 +59,15 @@ function Compressor() {
       }
     } catch (error) {
       console.error("Error during image compression:", error);
+    } finally {
+      setIsServerAction(false);
     }
   };
  
   
   return (
     <div
-      className={`flex justify-between  md:px-8 flex-col items-center ${
+      className={`flex min-h-[70vh]  md:px-8 flex-col items-center ${
         image != null && "md:flex-col"
       } `}
     >
@@ -155,7 +160,7 @@ const UploadedImage = ({ files }: any) => {
 
 const CompressedImage = ({ files }: any) => {
   return (
-    <div className="flex px-7 md:px-0 md:w-1/3">
+    <div className="flex px-7 md:px-0 md:w-1/3 ">
       <Image
         src={`data:image/jpeg;base64,${files}`}
         alt="preview"

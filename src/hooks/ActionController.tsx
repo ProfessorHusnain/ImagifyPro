@@ -9,6 +9,9 @@ interface ContextProps {
   isUploadedClicked: boolean;
   image: File | null;
   quality: number;
+  isServerAction: boolean;
+
+  setIsServerAction: (isServerAction: boolean) => void;
   setCompressor: (compressor: boolean) => void;
   setIsUploadedClicked: (isUploadedClicked: boolean) => void;
   setImage: (image: File) => void;
@@ -18,7 +21,7 @@ const ActionController = ({ children }: ActionContextProps) => {
   const [compressor, setCompressor] = useState<boolean>(true);
   const [convert, setConvert] = useState<boolean>(false);
   const [isUploadedClicked, setIsUploadedClicked] = useState<boolean>(false);
-  
+  const [isServerAction, setIsServerAction] = useState<boolean>(false);
 
   const [image, setImage] = useState<File | null>(null); // Update the type of `image` state
 
@@ -31,6 +34,8 @@ const ActionController = ({ children }: ActionContextProps) => {
         quality,
         isUploadedClicked,
         setIsUploadedClicked,
+        isServerAction,
+        setIsServerAction,
         setImage,
         setQuality,
         setCompressor,
@@ -46,6 +51,8 @@ const Context = createContext<ContextProps>({
   isUploadedClicked: false,
   image: null,
   quality: 100,
+  isServerAction: false,
+  setIsServerAction: (action: boolean) => {},
   setIsUploadedClicked: (action: boolean) => {},
   setCompressor: (action: boolean) => {},
   setImage: (image: File) => {},

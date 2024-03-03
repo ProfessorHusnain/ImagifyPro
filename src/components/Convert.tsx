@@ -29,6 +29,8 @@ function Convert() {
     setQuality,
     isUploadedClicked,
     setIsUploadedClicked,
+    isServerAction,
+    setIsServerAction,
   } = useAction();
   const handleExtentionChange = (e: any) => {
     setExtention(e.target.value);
@@ -55,6 +57,7 @@ function Convert() {
   }
   const handleUpload = async () => {
     try {
+      setIsServerAction(true);
       const response = await fetch("/api/convert", {
         method: "POST",
         body: formData,
@@ -71,6 +74,8 @@ function Convert() {
       }
     } catch (error) {
       console.error("Error during image compression:", error);
+    } finally {
+      setIsServerAction(false);
     }
   };
 
